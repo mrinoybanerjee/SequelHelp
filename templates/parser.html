@@ -1,0 +1,358 @@
+<!-- templates/parser.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+    <style>
+        textarea {
+	        height: auto;
+	        font-family: Courier New,Courier,Lucida Sans;
+	        font-size: 22px;
+	        background-color: #d1eded;
+        }
+        
+        #result {
+            font-size: 16px;
+        }
+        
+        .column {
+          float: left;
+          width: 50%;
+        }
+        
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 3%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+</h1>
+
+<div>
+    {% if question %}
+    Question {{question.id}}: {{question.question}} 
+    {% endif %}
+    <br> 
+    <br> 
+</div> 
+
+<div class='row' style='width:100%'> 
+    <div> 
+        {% if question %}
+            {% if question.id > 3 %} 
+            <table> 
+                <tr> 
+                    <td> 
+                        Customers 
+                        <table> 
+                            <tr> 
+                                <th> Name </th> 
+                                <th> Type </th> 
+                            </tr>
+                            <tr> 
+                                <td> CustomerId </td> 
+                                <td> INT </td>
+                            </tr>
+                            <tr> 
+                                <td> FirstName</td> 
+                                <td> VARCHAR(255) </td>
+                            </tr> 
+                            <tr> 
+                                <td> LastName </td> 
+                                <td> VARCHAR(255) </td>
+                            </tr> 
+                            <tr> 
+                                <td> PhoneNumber </td> 
+                                <td> REAL </td>
+                            </tr>
+                        </table>
+                    </td> 
+                    <td> 
+                        Purchases 
+                        <table> 
+                            <tr> 
+                                <th> Name </th> 
+                                <th> Type </th> 
+                            </tr>
+                            <tr> 
+                                <td> PurchaseId </td> 
+                                <td> INT </td>
+                            </tr>
+                            <tr> 
+                                <td> CustomerId </td> 
+                                <td> INT </td>
+                            </tr> 
+                            <tr> 
+                                <td> ProductId </td> 
+                                <td> INT </td>
+                            </tr> 
+                            <tr> 
+                                <td> Price </td> 
+                                <td> INT </td>
+                            </tr>
+                        </table>
+                    </td> 
+                    <td> 
+                        Products 
+                        <table> 
+                            <tr> 
+                                <th> Name </th> 
+                                <th> Type </th> 
+                            </tr>
+                            <tr> 
+                                <td> ProductId </td> 
+                                <td> INT </td>
+                            </tr>
+                            <tr> 
+                                <td> ProductName </td> 
+                                <td> VARCHAR(255) </td>
+                            </tr> 
+                            <tr> 
+                                <td> BrandName </td> 
+                                <td> VARCHAR(255) </td>
+                            </tr> 
+                            <tr> 
+                                <td> YearReleased </td> 
+                                <td> INT </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td> 
+                        Brands 
+                        <table> 
+                            <tr> 
+                                <th> Name </th> 
+                                <th> Type </th> 
+                            </tr>
+                            <tr> 
+                                <td> BrandName </td> 
+                                <td> VARCHAR(255) </td>
+                            </tr>
+                            <tr> 
+                                <td> YearEstablished </td> 
+                                <td> INT </td>
+                            </tr> 
+                            <tr> 
+                                <td> CEO </td> 
+                                <td> VARCHAR(255) </td>
+                            </tr> 
+                        </table>
+                    </td>
+                </tr>
+            </table> 
+            {% else %} 
+            <table> 
+                <tr> 
+                    <td> 
+                        Students
+                        <table> 
+                            <tr> 
+                                <th> Name </th> 
+                                <th> Type </th> 
+                            </tr>
+                            <tr> 
+                                <td> NetId </td> 
+                                <td> VARCHAR(10) </td>
+                            </tr>
+                            <tr> 
+                                <td> FirstName</td> 
+                                <td> VARCHAR(255) </td>
+                            </tr> 
+                            <tr> 
+                                <td> LastName </td> 
+                                <td> VARCHAR(255) </td>
+                            </tr> 
+                            <tr> 
+                                <td> Department </td> 
+                                <td> VARCHAR(255) </td>
+                            </tr>
+                        </table>
+                    </td> 
+                    <td> 
+                        Enrollments 
+                        <table> 
+                            <tr> 
+                                <th> Name </th> 
+                                <th> Type </th> 
+                            </tr>
+                            <tr> 
+                                <td> NetId </td> 
+                                <td> VARCHAR(10) </td>
+                            </tr>
+                            <tr> 
+                                <td> CRN </td> 
+                                <td> INT </td>
+                            </tr> 
+                            <tr> 
+                                <td> Credits </td> 
+                                <td> INT </td>
+                            </tr> 
+                            <tr> 
+                                <td> Score </td> 
+                                <td> REAL </td>
+                            </tr>
+                        </table>
+                    </td> 
+                    <td> 
+                        Courses
+                        <table> 
+                            <tr> 
+                                <th> Name </th> 
+                                <th> Type </th> 
+                            </tr>
+                            <tr> 
+                                <td> CRN </td> 
+                                <td> INT </td>
+                            </tr>
+                            <tr> 
+                                <td> Title </td> 
+                                <td> VARCHAR(255) </td>
+                            </tr> 
+                            <tr> 
+                                <td> Department </td> 
+                                <td> VARCHAR(100) </td>
+                            </tr> 
+                            <tr> 
+                                <td> Instructor </td> 
+                                <td> VARCHAR(255) </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table> 
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+<div class="row" style="width: 100%;">
+    <div class="column">
+        <form action="/parser" method="post" > 
+            <textarea rows="20" cols="60" name="query" placeholder="Your Query Here"></textarea> 
+            <table> 
+                <tr> 
+                    <td> <button id="submit" class="button is-block is-large">Submit</button> </td> 
+                    <td> <input type="submit" name="next" class="button is-block  is-large" value="Next"></td> 
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="column" style="overflow: auto;">
+        {% if results %}
+            {% if results.error %}
+                {{results.error}}
+            {% endif %}
+        {% endif %}
+        {% if results %}
+            <ul style="list-style-type:none;">
+                {% if results.queries %} 
+                    {% for r in results.col_names %}
+                        {% if loop.index == loop.length%} 
+                        <br> 
+                        Your submission: {{ results.queries[loop.index - 1] }} 
+                        <br> 
+                        <br> 
+                        <table>
+                            <tr>
+                                {% for relem in r %}
+                                <th> {{relem}} </th> 
+                                {% endfor %}
+                            </tr> 
+                            {% for rows in results.tables[loop.index-1] %} 
+                                <tr> 
+                                    {% for item in rows %} 
+                                    <td> {{item}} </td>
+                                    {% endfor %} 
+                                </tr>
+                            {% endfor %} 
+                        </table>
+                        {% endif %} 
+                    {% endfor %}
+                {% endif %} 
+            </ul>
+        {% if correct %} 
+            <br> <font color="green">Correct!</font> <br> <br> 
+        {% else %} 
+            <br> <font color="red">Incorrect!</font> <br> <br> 
+        {% endif %} 
+        {% endif %}
+    </div>
+</div>
+
+<div id="results" name="results">
+    {% if results %}
+        {% for r in results.col_names %}
+            <br> 
+            Step {{loop.index}}: <span class="query">{{results.queries[loop.index - 1]}}</span>
+            <br> 
+            <br> 
+            <table>
+                <tr>
+                    {% for relem in r %}
+                    <th> {{relem}} </th> 
+                    {% endfor %}
+                </tr> 
+                {% for rows in results.tables[loop.index-1] %} 
+                    <tr> 
+                        {% for item in rows %} 
+                        <td> {{item}} </td>
+                        {% endfor %} 
+                    </tr>
+                {% endfor %} 
+            </table>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="row" style="width: 100%;"> 
+    {% if expected_table %} 
+        <br> Expected table: <br> <br> 
+        <table> 
+            <tr> 
+                {% for i in expected_table.col_names %} 
+                <th> {{i}} </th> 
+                {% endfor %} 
+            </tr>
+            {% for r in expected_table.table %} 
+                <tr> 
+                    {% for r2 in r %} 
+                        <td> {{r2}} </td>
+                    {% endfor %} 
+                </tr>
+            {% endfor %} 
+        </table>
+    {% endif %} 
+</div>
+
+<script>
+    var textareas = document.getElementsByTagName('textarea');
+    var count = textareas.length;
+    for(var i=0;i<count;i++){
+        textareas[i].onkeydown = function(e){
+            if(e.keyCode==9 || e.which==9){
+                e.preventDefault();
+                var s = this.selectionStart;
+                this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+                this.selectionEnd = s+1; 
+            }
+        }
+    }
+</script> 
+{% endblock %}

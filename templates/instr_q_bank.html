@@ -1,0 +1,81 @@
+<!-- templates/instr_q_bank.html--> 
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    /*table, th, td {*/
+    /*    border: 3px solid Orange;*/
+    /*}*/
+    th, td {
+        padding: 15px;
+    }
+    
+    #main_table {
+        position: relative;
+        left: 10%;
+    }
+    
+    .text_field {
+        height: auto
+        font-family:"Times New Roman", Times, serif;
+        font-size: 22px;
+        background-color: #d1eded;
+    }
+    
+        
+</style>
+<script type="text/javascript">
+    function showMessage(message) {
+        if (confirm(message)) {
+           yourformelement.submit();
+        } else {
+           return false;
+        }
+    }
+    
+</script>
+<!--<div style = "position: absolute;">-->
+    <form action="/instr_q_bank" method="post" >
+        
+        <table id="main_table">
+            <tr>
+                <th>Question ID</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Action</th>
+            </tr>
+            {% if q_pool %}
+                {% for question in q_pool%}
+                <tr>
+                    <th>{{question.id}}</th>
+                        <th><textarea class="text_field" rows = 3 cols = 50 name="question_{{question.id}}">{{question.question}}</textarea></th>
+                        <th><textarea class="text_field query" rows = 4 cols = 40 name = "answer_{{question.id}}">{{question.answer}}</textarea></th>
+                        <th>
+                            <div class="row">
+                                <div class="column"><button type="submit" class="button is-block is-small" name="delete_question" onclick="return confirm('Are you sure you want to delete this question?')" value="{{question.id}}">Delete</button>
+                                </div>
+                                
+                                <div class="column">
+                                    <button type="submit" class="button is-block  is-small" name="update_question" onclick="return confirm('Are you sure you want to update this question?')" value="{{question.id}}">Update</button>
+                                </div>
+                            </div>
+                                    
+                            
+                        </th>
+                        
+                </tr>
+                {% endfor %}
+            {% endif %}
+            
+            <tr>
+                <th>New</th>
+                    <th><textarea class="text_field" rows = 3 cols = 50 placeholder="the question here" name="new_question"></textarea></th>
+                    <th><textarea class="text_field" rows = 3 cols = 50 placeholder="answer query here" name="new_answer"></textarea></th>
+                    <th><button style="top: 25px; margin:0px auto;" type="submit" class="button is-block is-large" name="add_question" value="add">Add</button></th>
+            </tr>
+        </table>
+    </form>
+<!--</div>-->
+{% endblock %}
