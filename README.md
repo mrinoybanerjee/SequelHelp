@@ -5,9 +5,9 @@ Description: This project helps students practice SQL problems by breaking downt
 Problem Solved: Due to the natural abstraction of SQL queries, beginners may havea hard time visualizing their queries, and not able to understand their final  output.  Our  project  serves  to  break  complicated  queries  intosmaller steps, whose result will be displayed accordingly.  After brain-storming through various ideas for our advanced functionality, the inspiration was drawn from the idea of the step by step solutions to math problems from Symbolab and Wolfram Alpha. For instance, the following query SELECT Name FROM Employees WHERE Salary >1000;
 will be broken down into multiple steps:
 </br>
-SELECT* FROM Employees
+1) SELECT* FROM Employees
 </br>
-SELECT* FROM Employees WHERE Salary >1000;
+2) SELECT* FROM Employees WHERE Salary >1000;
 </br>
-SELECT Name FROM Employees WHERE Salary >1000;
+3) SELECT Name FROM Employees WHERE Salary >1000;
 
