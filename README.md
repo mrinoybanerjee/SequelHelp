@@ -6,8 +6,6 @@ Problem Solved: Due to the natural abstraction of SQL queries, beginners may hav
 will be broken down into multiple steps:
 </br>
 1) SELECT* FROM Employees
-</br>
 2) SELECT* FROM Employees WHERE Salary >1000;
-</br>
 3) SELECT Name FROM Employees WHERE Salary >1000;
 
