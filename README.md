@@ -9,3 +9,9 @@ will be broken down into multiple steps:
 2) SELECT* FROM Employees WHERE Salary >1000;
 3) SELECT Name FROM Employees WHERE Salary >1000;
 
+
+
+
+
+https://user-images.githubusercontent.com/27897667/212987990-185e554d-4c01-4705-add7-4caf05a2ad2a.mp4
+
